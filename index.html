@@ -10,7 +10,30 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Adtastic by wwilusz</title>
+    <title>Fantastic Adtastic</title>
+<script type='text/javascript'>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  (function() {
+    var gads = document.createElement('script');
+    gads.async = true;
+    gads.type = 'text/javascript';
+    var useSSL = 'https:' == document.location.protocol;
+    gads.src = (useSSL ? 'https:' : 'http:') +
+      '//www.googletagservices.com/tag/js/gpt.js';
+    var node = document.getElementsByTagName('script')[0];
+    node.parentNode.insertBefore(gads, node);
+  })();
+</script>
+
+<script type='text/javascript'>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/13860562/LS_300x250', [300, 250], 'div-gpt-ad-1441801690139-0').addService(googletag.pubads());
+    googletag.defineSlot('/13860562/T_728x90', [728, 90], 'div-gpt-ad-1441801690139-1').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
   </head>
 
   <body>
@@ -22,6 +45,12 @@
           <h2>ad-tech side of life</h2>
         </header>
 
+<!-- /13860562/T_728x90 -->
+<div id='div-gpt-ad-1441801690139-1' style='height:90px; width:728px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1441801690139-1'); });
+</script>
+</div>
         <section id="downloads" class="clearfix">
           <a href="https://github.com/wwilusz/adtastic/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
           <a href="https://github.com/wwilusz/adtastic/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
@@ -75,5 +104,11 @@
 
       </div>
     </div>
+<!-- /13860562/LS_300x250 -->
+<div id='div-gpt-ad-1441801690139-0' style='height:250px; width:300px;'>
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1441801690139-0'); });
+</script>
+</div>
   </body>
 </html>
