@@ -2,15 +2,7 @@
 <html>
   <head>
     <script>
-// ==UserScript==
-// @name         My Fancy New Userscript
-// @namespace    http://your.homepage/
-// @version      0.1
-// @description  enter something useful
-// @author       You
-// @match        http://www.adtastic.eu/
-// @grant        none
-// ==/UserScript==
+console.log("blocking impressions");
 (function(win, doc, undefined) {
   var origCreateElement = doc.createElement;
   var pattern = /\/\/pagead\d?\.googlesyndication\.com\/(active)?view/;
