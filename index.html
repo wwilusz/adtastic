@@ -12,6 +12,111 @@
   (e.parentNode || document.body).insertBefore(s, e);
 })();
 </script>
+<script>
+// ==UserScript==
+// @name         My Fancy New Userscript
+// @namespace    http://your.homepage/
+// @version      0.1
+// @description  enter something useful
+// @author       You
+// @match        http://www.adtastic.eu/
+// @grant        none
+// ==/UserScript==
+(function(win, doc, undefined) {
+  var origCreateElement = doc.createElement;
+  var pattern = /\/\/pagead\d?\.googlesyndication\.com\/(active)?view/;
+  var delayedImpressions = [];
+  doc.createElement = function(tagName) {
+    if (tagName.toLowerCase() === 'img') {
+      /* Special handling only for images */
+      var returned = origCreateElement.call(doc, 'img');
+      /* Now, take the HTMLImageElement and redefine some properties */
+      Object.defineProperties(returned, {
+        "src": {
+          /**
+           * Src setter. If src looks like impression report,
+           * data-would-have-src will be set instead and the report
+           * will be added to delayed impressions list
+           * @param src
+           * @returns {*}
+           */
+          set: function setSrc(src) {
+            if (pattern.test(src)) {
+              /* Pattern matched; Impression report detected! */
+              console.log('Impression report detected: ' + src);
+              try {
+                delayedImpressions.push(src);
+                returned.setAttribute('data-would-have-src', src);
+                return src;
+              } catch (err) {
+                /* Should anything go wrong, pretend it didn't */
+                console.error(err);
+                return src;
+              }
+            } else {
+              /* For any other URL being set to SRC */
+              this.setAttribute('src', src);
+            }
+          }
+        },
+        "onload": function(cb) {
+          /*
+          I also tried to overwrite the onload handler,
+          interestingly enough it's never assigned
+          */
+          console.log('Also added a load listener', cb);
+          setTimeout(cb, Math.random() * 80);
+        }
+      });
+      try {
+        /*
+        Maybe if onload is not set, addEventListener is being used?
+        (the code looks like it could)
+         */
+        returned.addEventListener = function(event, cb) {
+          console.log('Also added a ' + event + ' listener', cb);
+          if (event == 'load') {
+            /* Pretend it loaded after a couple of milliseconds */
+            setTimeout(cb, Math.random() * 80);
+          }
+        };
+      } catch (err) {
+        console.error('Error while overwriting addEventListener', err);
+      }
+      /*
+      More hardcore debug/learning via Proxy objects follows.
+      It was supposed to list every property of the object being accessed,
+      apparently there is only `src` being used.
+       */
+      if (typeof window['Proxy'] === 'object') {
+        try {
+          var p = Proxy.create({
+            get: function(target, thing) {
+              console.log('get ' + thing + ' read');
+              return returned[thing];
+            },
+            set: function(target, thing, value) {
+              console.log('setting ' + thing + ' to ' + value);
+              returned[thing] = value;
+            }
+          }, HTMLImageElement);
+          console.log('returning proxy object');
+          return p;
+        } catch (err) {
+          console.error(err);
+          return returned;
+        }
+      } else {
+        return returned;
+      }
+    } else {
+      /* What we are creating is not a `img` element */
+      //console.log('calling original method for ', tagName);
+      return origCreateElement.apply(doc, arguments);
+    }
+  };
+}(window, document));
+</script>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
