@@ -15,6 +15,7 @@ function addCanvas () {
 	// Fill the path
 	context.fillStyle = "#ffc821";
 	context.fill();
+	console.log(canvas.toDataURL());
 
 	var currentDiv = document.getElementById("div1");
 	document.body.insertBefore(canvas, currentDiv);
