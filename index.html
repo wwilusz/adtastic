@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 
@@ -7,8 +8,8 @@
     <title>Fantastic Adtastic</title>
     <link rel="prefetch" href="//ci-aa-portal.mezzobit.com/wrapper/example-config.js">
     <link rel="dns-prefetch" href="//static.criteo.net">
-    <link rel="stylesheet" href="//www.adtastic.eu/stylesheets/stylesheet.css">
-    <link rel="stylesheet" href="//www.adtastic.eu//stylesheets/github-dark.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/github-dark.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <script>
         (function() {
@@ -21,9 +22,6 @@
         })();
     </script>
     <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -126,7 +124,7 @@
                     googletag.defineSlot('/13860562/MM_RBB', [300, 250], 'div-gpt-ad-1467286751287-3').addService(googletag.pubads());
                     googletag.pubads().enableSingleRequest();
                     googletag.enableServices();
-                }
+                });
     </script>
     <style>
         .slot {
@@ -140,17 +138,27 @@
 </head>
 
 <body>
-    <div id="container">
-        <div class="inner">
-
-            <header>
-                <h1>Adtastic</h1>
-                <h2>ad-tech side of life</h2>
-            </header>
             <script type="text/javascript">
                 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
                 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
             </script>
+<div class="wrapper">
+  <section>
+    <div id="title">
+      <h1>Aa-wrapper</h1>
+      <p>Acceptable Ads wrapper library</p>
+      <hr>
+      <span class="credits left">Project maintained by <a
+          href="https://github.com/mezzobit">mezzobit</a></span>
+    </div>
+
+    <h2>Ad slots</h2>
+    <div>
+
+    </div>
+    <!--[if !IE]>
+    <script>fixScale(document);</script><![endif]-->
+
             <script type="text/javascript">
                 try {
                     var pageTracker = _gat._getTracker("UA-67293872-1");
@@ -192,10 +200,14 @@
                     });
                 </script>
             </div>
-        </div>
+    <br/><br/><br/>
+    <h2>Telemetry data</h2>
+    <div id="log" style="font-family: Monospace; font-size: 9pt">
     </div>
-    </div>
-    <div id="log" style="font-family: Monospace; font-size: 9pt"></div>
+  </section>
+</div>
+
 </body>
 
 </html>
+
