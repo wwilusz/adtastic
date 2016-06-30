@@ -21,6 +21,82 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <title>Fantastic Adtastic</title>
+  <script>
+    var timeZero = (+new Date());
+    var aaWrapCmd = [];
+    (function () {
+      // Conditionally, synchronously insert wrapper
+      var src = '//ci-aa-portal.mezzobit.com/wrapper/aa-wrapper.min.js';
+      // if "unmin" is in the URL, use unminified file
+      if (window.location.href.indexOf('unmin') !== -1) {
+        src = src.replace('.min.js', '.js');
+      }
+
+      if (window.location.href.indexOf('nowrapper') === -1 && window.location.href.indexOf('async') === -1) {
+        document.write('<scr' + 'ipt src="' + src + '"><' + '/sc' + 'ript>')
+      }
+      if (window.location.href.indexOf('async') !== -1) {
+        var script = document.createElement('script');
+        script.async = true;
+        script.defer = true;
+        script.src = src;
+        document.documentElement.appendChild(script);
+      }
+    }());
+  </script>
+
+  <script>
+    var logLine = function () {
+      var el = document.body && document.getElementById('log');
+      if (el) {
+        var line = document.createElement('pre');
+        var args = Array.from(arguments);
+        args.forEach(function (arg) {
+          var str = ((typeof arg === 'string') ? arg : JSON.stringify(arg)) + ' ';
+          str.replace(/\n/g, '<br />');
+          line.innerHTML += str;
+        });
+        el.appendChild(line);
+      }
+    };
+
+    window.aaWrapCmd.push(function(aaWrapper) {
+      var wrapper = aaWrapper && aaWrapper.default || aaWrapper;
+      if (wrapper) {
+        logLine('Wrapper loaded');
+        wrapper.on('detection', function (result) {
+          switch (result) {
+            case (1):
+              logLine('Acceptable ads allowed');
+              break;
+            case (2):
+              logLine('Full ad blocking detected');
+              break;
+            case (0):
+              logLine('AdBlock not detected');
+              break;
+            default:
+              logLine('Detection ended with an unknown result');
+          }
+        });
+        wrapper.on('replace', function (data) {
+          logLine('Going to replace slot with provider \n', data.provider, 'and config\n', data.options);
+        });
+        var zero = +(new Date());
+        wrapper.init('//ci-aa-portal.mezzobit.com/wrapper/adtastic-config.js')
+            .then(function (result) {
+              logLine('Telemetry package:', JSON.stringify(result, null, 2));
+              console.log('Whole wrapper time:', new Date() - zero);
+              logLine('Whole wrapper time:', (new Date() - zero) + ' ms');
+            });
+      } else {
+        logLine('Wrapper NOT loaded');
+      }
+    });
+    if (window.location.href.indexOf('nowrapper') === -1 && window.location.href.indexOf('async') === -1) {
+      window.aaWrapCmd[0](aaWrapper.default);
+    }
+  </script>
 <script type='text/javascript'>
   var googletag = googletag || {};
   googletag.cmd = googletag.cmd || [];
