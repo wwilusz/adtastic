@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Fantastic Adtastic</title>
-    <link rel="prefetch" href="//ci-aa-portal.mezzobit.com/wrapper/example-config.js">
     <link rel="dns-prefetch" href="//static.criteo.net">
     <link rel="stylesheet" href="/stylesheets/styles.css">
     <link rel="stylesheet" href="/stylesheets/github-dark.css">
@@ -87,7 +86,7 @@
                     logLine('Going to replace slot with provider \n', data.provider, 'and config\n', data.options);
                 });
                 var zero = +(new Date());
-                wrapper.init('//ci-aa-portal.mezzobit.com/wrapper/adtastic-config.js')
+                wrapper.init('adtastic-config.js')
                     .then(function(result) {
                         logLine('Telemetry package:', JSON.stringify(result, null, 2));
                         console.log('Whole wrapper time:', new Date() - zero);
