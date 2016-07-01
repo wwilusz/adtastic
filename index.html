@@ -86,7 +86,7 @@
                     logLine('Going to replace slot with provider \n', data.provider, 'and config\n', data.options);
                 });
                 var zero = +(new Date());
-                wrapper.init('adtastic-config.js')
+                wrapper.init('/adtastic-config.js')
                     .then(function(result) {
                         logLine('Telemetry package:', JSON.stringify(result, null, 2));
                         console.log('Whole wrapper time:', new Date() - zero);
