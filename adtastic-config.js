@@ -1,6 +1,6 @@
 __aaWrapperCfg({
   customerId: 'adtastic',
-  collectorUrl: 'http://ci-aa-collector.mezzobit.com/',
+  collectorUrl: 'http://ci-data.aaplat.net/',
 
   replacement_groups: [{
     url_pattern: /.*/,
